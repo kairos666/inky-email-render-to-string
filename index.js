@@ -76,17 +76,17 @@ class InkyMailOutput {
     }
 }
 
-/* DEV */
+/* Sample usage */
 let instance = new InkyMailOutput();
 
 // provide mail data & conf --> return promised processed email
-instance.produceMail('basic', {
-        root: 'src/pages',
-        layouts: 'src/layouts',
-        partials: 'src/partials',
-        helpers: 'src/helpers',
-        css: 'src/css/app.css', // must be repeated here and in data (relative to index.js)
-        data: 'src/data'
+instance.produceMail('dev-report', {
+        root: 'email-template/pages',
+        layouts: 'email-template/layouts',
+        partials: 'email-template/partials',
+        helpers: 'email-template/helpers',
+        css: 'email-template/css/app.css', // must be repeated here and in data (relative to index.js)
+        data: 'email-template/data'
     }, {
         css: '../css/app.css',
         subject: 'TEST SUBJECT',
