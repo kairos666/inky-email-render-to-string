@@ -14,9 +14,16 @@ class InkyMailOutput {
         this._tplName       = undefined;
     }
 
-    produceMail(emailTemplateName, emailDataObj) {
-        this._mailDataObj = emailDataObj;
+    produceMail(emailTemplateName, emailConfObj, emailDataObj) {
+        this._mailDataObj = emailConfObj;
+        this._mailContentObj = emailDataObj;
         this._tplName = emailTemplateName;
+
+        // write data json file
+        fs.writeFileSync(`${this._mailDataObj.data}/${this._tplName}.json`, JSON.stringify(this._mailContentObj), null, function(err) {
+            if(err) return console.log(err);
+            console.log('written email json file');
+        });
 
         return new Promise((resolve, reject) => {
             this.streamToString(this.buildMail(), 
@@ -61,7 +68,7 @@ class InkyMailOutput {
             .pipe($.replace, '<!-- <style> -->', `<style>${mqCss}</style>`)
             .pipe($.replace, '<link rel="stylesheet" type="text/css" href="css/app.css">', '')
             .pipe($.htmlmin, {
-                collapseWhitespace: false,
+                collapseWhitespace: true,
                 minifyCSS: true
             });
 
@@ -74,15 +81,18 @@ let instance = new InkyMailOutput();
 
 // provide mail data & conf --> return promised processed email
 instance.produceMail('basic', {
-    root: 'src/pages',
-    layouts: 'src/layouts',
-    partials: 'src/partials',
-    helpers: 'src/helpers',
-    css: 'src/css/app.css',
-    mailData: {
-        subject: 'test subject'
+        root: 'src/pages',
+        layouts: 'src/layouts',
+        partials: 'src/partials',
+        helpers: 'src/helpers',
+        css: 'src/css/app.css', // must be repeated here and in data (relative to index.js)
+        data: 'src/data'
+    }, {
+        css: '../css/app.css',
+        subject: 'TEST SUBJECT',
+        backlogItems: ['one', 'two', 'three']
     }
-}).then(
+).then(
     function(resp) { console.log(resp); },
     function(error) { console.log(error); }
 );
