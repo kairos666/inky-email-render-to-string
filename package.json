@@ -1,0 +1,35 @@
+{
+  "name": "foundation-email-process-output",
+  "version": "0.0.1",
+  "description": "use foundation email template builder programmatically",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kairos666/foundation-email-process-output.git"
+  },
+  "keywords": [
+    "foundation",
+    "email",
+    "inky"
+  ],
+  "author": "David Maggi <musashi.miyamoto81@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kairos666/foundation-email-process-output/issues"
+  },
+  "homepage": "https://github.com/kairos666/foundation-email-process-output#readme",
+  "dependencies": {
+    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
+    "gulp-htmlmin": "^1.1.1",
+    "gulp-inline-css": "^3.0.0",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-replace": "^0.5.4",
+    "inky": "^1.3.6",
+    "lazypipe": "^1.0.1",
+    "panini": "^1.3.0",
+    "siphon-media-query": "^1.0.0"
+  }
+}
