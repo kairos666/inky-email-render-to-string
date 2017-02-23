@@ -5,7 +5,7 @@
         <img src="https://cdn1.partner.hpe.com/hpe-cpp-default-theme/images/cpp/HPE-Logo.png" alt="Hewlett Packard Entreprise">
       </columns>
       <columns small="6">
-        <p class="text-right">Sprint report</p>
+        <p class="text-right">{{dev-report.reportTitle}}</p>
       </columns>
     </row>
   </container>
@@ -14,51 +14,56 @@
   <spacer size="16"></spacer>
   <row>
     <columns>
-      <h1>CPX Mobile Daily Report</h1>
-      <h4>February 19th 2017, 9:37 am (GMT +1)</h4>
+      <h1>{{dev-report.reportTopic}} - {{dev-report.reportReleaseSprint}}</h1>
+      <h4>{{dev-report.reportDate}}</h4>
     </columns>
   </row>
   <row>
       <columns small="6">
-        <callout class="success">
-            <h2><span class="green-bullet big"></span> status GREEN</h2>
-        </callout>
-        <!-- <callout class="warning">
-            <h2><span class="yellow-bullet big"></span> status YELLOW</h2>
-        </callout>
-        <callout class="alert">
-            <h2><span class="red-bullet big"></span> status RED</h2>
-        </callout> -->
+        {{#ifequal dev-report.overallStatus 'green'}}
+            <callout class="success">
+                <h2><span class="green-bullet big"></span> status GREEN</h2>
+            </callout>
+        {{/ifequal}}
+        {{#ifequal dev-report.overallStatus 'yellow'}}
+            <callout class="warning">
+                <h2><span class="yellow-bullet big"></span> status YELLOW</h2>
+            </callout>
+        {{/ifequal}}
+        {{#ifequal dev-report.overallStatus 'red'}}
+            <callout class="alert">
+                <h2><span class="red-bullet big"></span> status RED</h2>
+            </callout>
+        {{/ifequal}}
       </columns>
       <columns small="6">
-        <p><span class="green-bullet"></span> Portal-Portal Services - 15 US</p>
-        <p><span class="green-bullet"></span> Portal-Content Services and Search - 8 US</p>
-        <p><span class="red-bullet"></span> Portal-Integration Services - 2 US</p>
-        <p><span class="yellow-bullet"></span> Portal-User Services - 3 US</p>
+        {{#each dev-report.subStatuses}}
+            <p><span class="{{this.status}}-bullet"></span> {{this.name}} - {{this.usCount}} US</p>
+        {{/each}}
       </columns>
   </row>
   <row>
     <columns small="4">
         <ul>
-            <li>blocked: 0 us</li>
-            <li>green: 0 us</li>
-            <li>yellow: 0 us</li>
-            <li>red: 28 us</li>
+            <li>blocked: {{dev-report.overallIndicators.blockedCount}} us</li>
+            <li>green: {{dev-report.overallIndicators.greenCount}} us</li>
+            <li>yellow: {{dev-report.overallIndicators.yellowCount}} us</li>
+            <li>red: {{dev-report.overallIndicators.redCount}} us</li>
         </ul>
     </columns>
     <columns small="4">
         <ul>
-            <li>approved: 28 us / 100%</li>
-            <li>tasked: 25 us / 82%</li>
-            <li>in progress: 28 us / 100%</li>
-            <li>in testing: 25 us / 100%</li>
+            <li>approved: {{dev-report.overallIndicators.approvedCount}} us / {{dev-report.overallIndicators.approvedPercentage}}%</li>
+            <li>tasked: {{dev-report.overallIndicators.taskedCount}} us / {{dev-report.overallIndicators.taskedPercentage}}%</li>
+            <li>in progress: {{dev-report.overallIndicators.inProgressCount}} us / {{dev-report.overallIndicators.inProgressPercentage}}%</li>
+            <li>in testing: {{dev-report.overallIndicators.inTestingCount}} us / {{dev-report.overallIndicators.inTestingPercentage}}%</li>
         </ul>
     </columns>
     <columns small="4">
         <ul>
-            <li>estimated loe: 153 mds</li>
-            <li>current loe: 167 mds</li>
-            <li>deviation +9 %</li>
+            <li>estimated loe: {{dev-report.overallIndicators.estimatedLOE}} mds</li>
+            <li>current loe: {{dev-report.overallIndicators.currentLOE}} mds</li>
+            <li>deviation {{dev-report.overallIndicators.deviationPercentage}} %</li>
         </ul>
     </columns>
   </row>
@@ -68,7 +73,7 @@
   <container>
     <row>
         <columns>
-            <h2>Backlog details - 28 us</h2>
+            <h2>Backlog details - {{dev-report.backlog.usCount}} us</h2>
         </columns>
     </row>
   </container>
@@ -83,46 +88,18 @@
                 <th>IT status</th>
                 <th>BR</th>
             </tr>
-            <tr>
-                <td>
-                    <a target="_blank" href="https://agilemanager-syd.saas.hp.com/agm/webui/alm/t718469238_hp_com/Channel_Partner_Portal/apm/@3OuIaATvClATx/?TENANTID=718469238#release/release_backlog/shared.update;entityTypeName=requirement;productGroupId=1000;entityId=4419" title="go to detailed US">4419</a>
-                </td>
-                <td>rate delivery - feedback webservice [CPX backend]</td>
-                <td>Portal-Portal Services</td>
-                <td>In Testing</td>
-                <td class="green">Green</td>
-                <td>92</td>
-            </tr>
-            <tr>
-                <td>
-                    <a target="_blank" href="https://agilemanager-syd.saas.hp.com/agm/webui/alm/t718469238_hp_com/Channel_Partner_Portal/apm/@3OuIaATvClATx/?TENANTID=718469238#release/release_backlog/shared.update;entityTypeName=requirement;productGroupId=1000;entityId=4419" title="go to detailed US">4449</a>
-                </td>
-                <td>rate delivery - Feedback system data sharing (access to PRP database)</td>
-                <td>Portal-Portal Services</td>
-                <td>In Testing</td>
-                <td class="green">Green</td>
-                <td>92</td>
-            </tr>
-            <tr>
-                <td>
-                    <a target="_blank" href="https://agilemanager-syd.saas.hp.com/agm/webui/alm/t718469238_hp_com/Channel_Partner_Portal/apm/@3OuIaATvClATx/?TENANTID=718469238#release/release_backlog/shared.update;entityTypeName=requirement;productGroupId=1000;entityId=4419" title="go to detailed US">4507</a>
-                </td>
-                <td>in-app simulation : backend API modification to handle impersonate [CPX backend]</td>
-                <td>Portal-Portal Services</td>
-                <td>In Testing</td>
-                <td class="yellow">Yellow</td>
-                <td>92</td>
-            </tr>
-            <tr>
-                <td>
-                    <a target="_blank" href="https://agilemanager-syd.saas.hp.com/agm/webui/alm/t718469238_hp_com/Channel_Partner_Portal/apm/@3OuIaATvClATx/?TENANTID=718469238#release/release_backlog/shared.update;entityTypeName=requirement;productGroupId=1000;entityId=4419" title="go to detailed US">4511</a>
-                </td>
-                <td>Support Page in the Portal Internal Site to display mobile app data and monitoring data</td>
-                <td>Portal-Portal Services</td>
-                <td>In Testing</td>
-                <td class="red">Red</td>
-                <td>92</td>
-            </tr>
+            {{#each dev-report.backlog.backlogItems}}
+                <tr>
+                    <td>
+                        <a target="_blank" href="{{this.link}}" title="go to detailed US in AGM">{{this.id}}</a>
+                    </td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.team}}</td>
+                    <td>{{this.status}}</td>
+                    <td class="{{this.itStatus}}">{{this.itStatus}}</td>
+                    <td>{{this.br}}</td>
+                </tr>
+            {{/each}}
         </table>
     </columns>
   </row>
@@ -145,18 +122,14 @@
                 <th>Scoped Us / Defect</th>
                 <th>Comments</th>
             </tr>
-            <tr>
-                <td>13th Dec 2016</td>
-                <td></td>
-                <td>#4419</td>
-                <td>added to scope (fixing inconsisitency)</td>
-            </tr>
-            <tr>
-                <td>14th Dec 2016</td>
-                <td>#4673</td>
-                <td></td>
-                <td>removed form AGM</td>
-            </tr>
+            {{#each dev-report.metaData.scopeChangeHistory}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.unscoped}}</td>
+                    <td>{{this.scoped}}</td>
+                    <td>{{this.comment}}</td>
+                </tr>
+            {{/each}}
         </table>
     </columns>
   </row>
@@ -180,24 +153,17 @@
                 <th>Status</th>
                 <th>Comments</th>
             </tr>
-            <tr>
-                <td>6th Jan 2017</td>
-                <td>Issue</td>
-                <td>US - 4523 - Advanced Tibco Consumer : development complexity Difficult compregension, too much time passed on explanation</td>
-                <td>Hongbin Xu</td>
-                <td>10th Jan 2017</td>
-                <td class="yellow">yellow</td>
-                <td>prototype provided waiting for</td>
-            </tr>
-            <tr>
-                <td>9th Jan 2017</td>
-                <td>Issue</td>
-                <td>Techdata beta users unable to see their orders in the mobile app Need reindexing on ITG, erfc scheduled for prod on Monday 16</td>
-                <td>David George</td>
-                <td>10th Jan 2017</td>
-                <td class="green">green</td>
-                <td>tested successfuly on ITG, waiting scheduling of erfc David G. availibility checked for next monday Backup identified for other day if erfc moved</td>
-            </tr>
+            {{#each dev-report.metaData.risks}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.type}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.owner}}</td>
+                    <td>{{this.dueDate}}</td>
+                    <td class="{{this.status}}">{{this.status}}</td>
+                    <td>{{this.comment}}</td>
+                </tr>
+            {{/each}}
         </table>
     </columns>
   </row>
@@ -216,14 +182,12 @@
                 <th>Date</th>
                 <th>Accomplishments / Activities</th>
             </tr>
-            <tr>
-                <td>1st Dec 2016</td>
-                <td>Design started</td>
-            </tr>
-            <tr>
-                <td>8th Dec 2016</td>
-                <td>Scope lock</td>
-            </tr>
+            {{#each dev-report.metaData.accomplishments}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.accomplishment}}</td>
+                </tr>
+            {{/each}}
         </table>
     </columns>
   </row>

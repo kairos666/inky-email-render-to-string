@@ -106,7 +106,11 @@ instance.produceMail('dev-report', {
         css: 'css/app.css', // must be repeated in tech data (relative to index.js)
         data: 'data'
     }, {
-        subject: 'Sprint daily report - CPX Mobile - February 19th 2017, 9:37 am (GMT +1)',
+        subject: 'Sprint 3 daily report - CPX Mobile - February 19th 2017, 9:37 am (GMT +1)',
+        reportTitle: 'Sprint daily report',
+        reportReleaseSprint: 'EG-CPX Order Visibility R1 / Sprint 3',
+        reportTopic:'CPX Mobile Report',
+        reportDate: 'February 19th 2017, 9:37 am (GMT +1)',
         overallStatus: 'green',
         subStatuses: [
             { status: 'green', name: 'Portal-Portal Services', usCount: 15 },
