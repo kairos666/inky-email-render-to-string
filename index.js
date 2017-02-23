@@ -37,6 +37,14 @@ class InkyMailOutput {
             if(err) return console.log('tech data error in file write: ', err);
         });
 
+        // write main data json file
+        let mainObj = {
+            subject: emailConfObj.subject
+        }
+        fs.writeFileSync(`${this._mailDataObj.data}/main.json`, JSON.stringify(mainObj), null, function(err) {
+            if(err) return console.log('main data error in file write: ', err);
+        });
+
         // write data json file
         fs.writeFileSync(`${this._mailDataObj.data}/${this._tplName}.json`, JSON.stringify(this._mailContentObj), null, function(err) {
             if(err) return console.log('mail data error in file write: ', err);
@@ -85,7 +93,7 @@ class InkyMailOutput {
             .pipe($.replace, '<!-- <style> -->', `<style>${mqCss}</style>`)
             .pipe($.replace, '<link rel="stylesheet" type="text/css" href="css/app.css">', '')
             .pipe($.htmlmin, {
-                collapseWhitespace: true,
+                collapseWhitespace: false,
                 minifyCSS: true
             });
 
@@ -104,9 +112,9 @@ instance.produceMail('dev-report', {
         partials: 'partials',
         helpers: 'helpers',
         css: 'css/app.css', // must be repeated in tech data (relative to index.js)
+        subject: 'Sprint 3 daily report - CPX Mobile - February 19th 2017, 9:37 am (GMT +1)',
         data: 'data'
     }, {
-        subject: 'Sprint 3 daily report - CPX Mobile - February 19th 2017, 9:37 am (GMT +1)',
         reportTitle: 'Sprint daily report',
         reportReleaseSprint: 'EG-CPX Order Visibility R1 / Sprint 3',
         reportTopic:'CPX Mobile Report',
@@ -160,7 +168,13 @@ instance.produceMail('dev-report', {
         }
     }
 ).then(
-    function(resp) { console.log(resp); },
+    function(resp) { 
+        console.log('successful email render'); 
+
+        fs.writeFileSync(`email-sample.html`, resp, null, function(err) {
+            if(err) return console.log('rendered mail HTMLdata error in file write: ', err);
+        });
+    },
     function(error) { console.log(error); }
 );
 

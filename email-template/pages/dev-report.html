@@ -10,7 +10,7 @@
     </row>
   </container>
 </wrapper>
-<container>
+<container class="content-container">
   <spacer size="16"></spacer>
   <row>
     <columns>
@@ -22,23 +22,44 @@
       <columns small="6">
         {{#ifequal dev-report.overallStatus 'green'}}
             <callout class="success">
-                <h2><span class="green-bullet big"></span> status GREEN</h2>
+                <table>
+                    <tr>
+                        <td class="green" style="width:39px;"></td>
+                        <td class="pad-cell-left"><h2 class="overall-status-title">status GREEN</h2></td>
+                    </tr>
+                </table>
             </callout>
         {{/ifequal}}
         {{#ifequal dev-report.overallStatus 'yellow'}}
             <callout class="warning">
-                <h2><span class="yellow-bullet big"></span> status YELLOW</h2>
+                <table>
+                    <tr>
+                        <td class="yellow" style="width:39px;"></td>
+                        <td class="pad-cell-left"><h2 class="overall-status-title">status YELLOW</h2></td>
+                    </tr>
+                </table>
             </callout>
         {{/ifequal}}
         {{#ifequal dev-report.overallStatus 'red'}}
             <callout class="alert">
-                <h2><span class="red-bullet big"></span> status RED</h2>
+                <table>
+                    <tr>
+                        <td class="red" style="width:39px;"></td>
+                        <td class="pad-cell-left"><h2 class="overall-status-title">status RED</h2></td>
+                    </tr>
+                </table>
             </callout>
         {{/ifequal}}
       </columns>
       <columns small="6">
         {{#each dev-report.subStatuses}}
-            <p><span class="{{this.status}}-bullet"></span> {{this.name}} - {{this.usCount}} US</p>
+            <table class="sub-status-indicator">
+                <tr>
+                    <td class="{{this.status}}" style="width:20px;"></td>
+                    <td><p>{{this.name}} - {{this.usCount}} US</p></td>
+                </tr>
+            </table>
+            <spacer size="1"></spacer>
         {{/each}}
       </columns>
   </row>
