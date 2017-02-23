@@ -29,10 +29,17 @@ class InkyMailOutput {
         this._mailContentObj = emailDataObj;
         this._tplName = emailTemplateName;
 
+        // write tech data json file
+        let techObj = {
+            css: `../${emailConfObj.css}`
+        };
+        fs.writeFileSync(`${this._mailDataObj.data}/tech.json`, JSON.stringify(techObj), null, function(err) {
+            if(err) return console.log('tech data error in file write: ', err);
+        });
+
         // write data json file
         fs.writeFileSync(`${this._mailDataObj.data}/${this._tplName}.json`, JSON.stringify(this._mailContentObj), null, function(err) {
-            if(err) return console.log(err);
-            console.log('written email json file');
+            if(err) return console.log('mail data error in file write: ', err);
         });
 
         return new Promise((resolve, reject) => {
@@ -96,10 +103,9 @@ instance.produceMail('dev-report', {
         layouts: 'layouts',
         partials: 'partials',
         helpers: 'helpers',
-        css: 'css/app.css', // must be repeated here and in data (relative to index.js)
+        css: 'css/app.css', // must be repeated in tech data (relative to index.js)
         data: 'data'
     }, {
-        css: '../css/app.css',
         subject: 'Sprint daily report - CPX Mobile - February 19th 2017, 9:37 am (GMT +1)',
         overallStatus: 'green',
         subStatuses: [
