@@ -1,5 +1,5 @@
 {
-  "name": "foundation-email-process-output",
+  "name": "inky-email-render-to-string",
   "version": "0.0.1",
   "description": "use foundation email template builder programmatically",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kairos666/foundation-email-process-output.git"
+    "url": "git+https://github.com/kairos666/inky-email-render-to-string.git"
   },
   "keywords": [
     "foundation",
@@ -18,9 +18,9 @@
   "author": "David Maggi <musashi.miyamoto81@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kairos666/foundation-email-process-output/issues"
+    "url": "https://github.com/kairos666/inky-email-render-to-string/issues"
   },
-  "homepage": "https://github.com/kairos666/foundation-email-process-output#readme",
+  "homepage": "https://github.com/kairos666/inky-email-render-to-string#readme",
   "dependencies": {
     "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
     "gulp-htmlmin": "^1.1.1",
