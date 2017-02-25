@@ -6,8 +6,9 @@ const siphon        = require('siphon-media-query');
 const lazypipe      = require('lazypipe');
 
 const gulp          = require('gulp');
-const plugins       = require('gulp-load-plugins');
-const $ = plugins();
+const inlineCss     = require('gulp-inline-css');
+const replace       = require('gulp-replace');
+const htmlmin       = require('gulp-htmlmin');
 
 class InkyMailOutput {
     constructor(tplPath) {
@@ -84,16 +85,16 @@ class InkyMailOutput {
         let mqCss = siphon(css);
 
         let pipe = lazypipe()
-            .pipe($.inlineCss, {
+            .pipe(inlineCss, {
                 applyStyleTags: false,
                 removeStyleTags: true,
                 preserveMediaQueries: true,
                 removeLinkTags: false
             })
-            .pipe($.replace, '<!-- <style> -->', `<style>${mqCss}</style>`)
-            .pipe($.replace, '<link rel="stylesheet" type="text/css" href="css/app.css">', '')
-            .pipe($.htmlmin, {
-                collapseWhitespace: false,
+            .pipe(replace, '<!-- <style> -->', `<style>${mqCss}</style>`)
+            .pipe(replace, '<link rel="stylesheet" type="text/css" href="css/app.css">', '')
+            .pipe(htmlmin, {
+                collapseWhitespace: true,
                 minifyCSS: true
             });
 
