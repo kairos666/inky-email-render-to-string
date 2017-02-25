@@ -1,0 +1,226 @@
+<wrapper class="header">
+  <container>
+    <row class="collapse">
+      <columns small="6">
+        <img src="https://cdn1.partner.hpe.com/hpe-cpp-default-theme/images/cpp/HPE-Logo.png" alt="Hewlett Packard Entreprise">
+      </columns>
+      <columns small="6">
+        <p class="text-right">{{dev-report.reportTitle}}</p>
+      </columns>
+    </row>
+  </container>
+</wrapper>
+<container class="content-container">
+  <spacer size="16"></spacer>
+  <row>
+    <columns>
+      <h1>{{dev-report.reportTopic}} - {{dev-report.reportReleaseSprint}}</h1>
+      <h4>{{dev-report.reportDate}}</h4>
+    </columns>
+  </row>
+  <row>
+      <columns small="6">
+        {{#ifequal dev-report.overallStatus 'green'}}
+            <callout class="success">
+                <table>
+                    <tr>
+                        <td class="green" style="width:39px;"></td>
+                        <td class="pad-cell-left"><h2 class="overall-status-title">status GREEN</h2></td>
+                    </tr>
+                </table>
+            </callout>
+        {{/ifequal}}
+        {{#ifequal dev-report.overallStatus 'yellow'}}
+            <callout class="warning">
+                <table>
+                    <tr>
+                        <td class="yellow" style="width:39px;"></td>
+                        <td class="pad-cell-left"><h2 class="overall-status-title">status YELLOW</h2></td>
+                    </tr>
+                </table>
+            </callout>
+        {{/ifequal}}
+        {{#ifequal dev-report.overallStatus 'red'}}
+            <callout class="alert">
+                <table>
+                    <tr>
+                        <td class="red" style="width:39px;"></td>
+                        <td class="pad-cell-left"><h2 class="overall-status-title">status RED</h2></td>
+                    </tr>
+                </table>
+            </callout>
+        {{/ifequal}}
+      </columns>
+      <columns small="6">
+        {{#each dev-report.subStatuses}}
+            <table class="sub-status-indicator">
+                <tr>
+                    <td class="{{this.status}}" style="width:20px;"></td>
+                    <td><p>{{this.name}} - {{this.usCount}} US</p></td>
+                </tr>
+            </table>
+            <spacer size="1"></spacer>
+        {{/each}}
+      </columns>
+  </row>
+  <row>
+    <columns small="4">
+        <ul>
+            <li>blocked: {{dev-report.overallIndicators.blockedCount}} us</li>
+            <li>green: {{dev-report.overallIndicators.greenCount}} us</li>
+            <li>yellow: {{dev-report.overallIndicators.yellowCount}} us</li>
+            <li>red: {{dev-report.overallIndicators.redCount}} us</li>
+        </ul>
+    </columns>
+    <columns small="4">
+        <ul>
+            <li>approved: {{dev-report.overallIndicators.approvedCount}} us / {{dev-report.overallIndicators.approvedPercentage}}%</li>
+            <li>tasked: {{dev-report.overallIndicators.taskedCount}} us / {{dev-report.overallIndicators.taskedPercentage}}%</li>
+            <li>in progress: {{dev-report.overallIndicators.inProgressCount}} us / {{dev-report.overallIndicators.inProgressPercentage}}%</li>
+            <li>in testing: {{dev-report.overallIndicators.inTestingCount}} us / {{dev-report.overallIndicators.inTestingPercentage}}%</li>
+        </ul>
+    </columns>
+    <columns small="4">
+        <ul>
+            <li>estimated loe: {{dev-report.overallIndicators.estimatedLOE}} mds</li>
+            <li>current loe: {{dev-report.overallIndicators.currentLOE}} mds</li>
+            <li>deviation {{dev-report.overallIndicators.deviationPercentage}} %</li>
+        </ul>
+    </columns>
+  </row>
+</container>
+<spacer size="16"></spacer>
+<div class="backlog-container">
+  <container>
+    <row>
+        <columns>
+            <h2>Backlog details - {{dev-report.backlog.usCount}} us</h2>
+        </columns>
+    </row>
+  </container>
+  <row>
+    <columns>
+        <table class="backlog-table">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Status</th>
+                <th>IT status</th>
+                <th>BR</th>
+            </tr>
+            {{#each dev-report.backlog.backlogItems}}
+                <tr>
+                    <td>
+                        <a target="_blank" href="{{this.link}}" title="go to detailed US in AGM">{{this.id}}</a>
+                    </td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.team}}</td>
+                    <td>{{this.status}}</td>
+                    <td class="{{this.itStatus}}">{{this.itStatus}}</td>
+                    <td>{{this.br}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </columns>
+  </row>
+</div>
+<spacer size="16"></spacer>
+<div class="meta-data-container">
+  <container>
+    <row>
+        <columns>
+            <h2>Scope Change History</h2>
+        </columns>
+    </row>
+  </container>
+  <row>
+    <columns>
+        <table class="meta-data-table">
+            <tr>
+                <th>Date</th>
+                <th>Unscoped US / Defect</th>
+                <th>Scoped Us / Defect</th>
+                <th>Comments</th>
+            </tr>
+            {{#each dev-report.metaData.scopeChangeHistory}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.unscoped}}</td>
+                    <td>{{this.scoped}}</td>
+                    <td>{{this.comment}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </columns>
+  </row>
+  <spacer size="32"></spacer>
+  <container>
+    <row>
+        <columns>
+            <h2>Risks / Issues / Actions items</h2>
+        </columns>
+    </row>
+  </container>
+  <row>
+    <columns>
+        <table class="meta-data-table">
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Due date</th>
+                <th>Status</th>
+                <th>Comments</th>
+            </tr>
+            {{#each dev-report.metaData.risks}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.type}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.owner}}</td>
+                    <td>{{this.dueDate}}</td>
+                    <td class="{{this.status}}">{{this.status}}</td>
+                    <td>{{this.comment}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </columns>
+  </row>
+  <spacer size="32"></spacer>
+  <container>
+    <row>
+        <columns>
+            <h2>Accomplishments / Activities</h2>
+        </columns>
+    </row>
+  </container>
+  <row>
+    <columns>
+        <table class="meta-data-table">
+            <tr>
+                <th>Date</th>
+                <th>Accomplishments / Activities</th>
+            </tr>
+            {{#each dev-report.metaData.accomplishments}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.accomplishment}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </columns>
+  </row>
+</div>
+<spacer size="16"></spacer>
+<wrapper class="footer">
+    <spacer size="16"></spacer>
+    <container>
+        <row class="collapse">
+        <columns small="12">
+            <img src="https://cdn1.partner.hpe.com/hpe-cpp-default-theme/images/cpp/HPE-Logo.png" alt="Hewlett Packard Entreprise">
+        </columns>
+        </row>
+    </container>
+</wrapper>
