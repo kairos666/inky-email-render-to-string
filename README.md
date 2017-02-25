@@ -10,7 +10,8 @@ npm install inky-email-render-to-string
 ```
 
 ## usage
-instanciate the class with the path to **email templates folder**. Then you can use the produceMail function with parameters to output a promise with the email as a string.
+instanciate the class with the path to **email templates folder**. Then you can use the **produceMail** method with parameters to output a promise with the email as a string.
+You can render several email templates as long as they share the same default layout.
 ```javascript
 const InkyMailOutput = require('inky-email-render-to-string');
 
