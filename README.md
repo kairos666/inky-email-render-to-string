@@ -28,8 +28,7 @@ let emailConfig = {
     partials: 'partials',
     helpers: 'helpers',
     css: 'css/app.css',
-    subject: 'My Basic Email Template Subject',
-    data: 'data' // TODO internalize this
+    subject: 'My Basic Email Template Subject'
 };
 
 // all data to populate the email template
@@ -52,3 +51,7 @@ instance.produceMail(templateName, emailConfig, emailData).then(
 ```
 
 Note: the **email-template** folder is provided as a sample based on Foundation email template. You can delete it and provide your own. Remember to modify the config accordingly.
+
+### Changelog
+v0.0.2
+- no need to pass data folder property in emailConfig. It is setup automatically.

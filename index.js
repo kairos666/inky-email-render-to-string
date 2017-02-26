@@ -25,7 +25,7 @@ class InkyMailOutput {
             partials: path.join(this._tplPath, emailConfObj.partials),
             helpers: path.join(this._tplPath, emailConfObj.helpers),
             css: path.join(this._tplPath, emailConfObj.css),
-            data: path.join(this._tplPath, emailConfObj.data)
+            data: path.join(this._tplPath, 'data')
         };
         this._mailContentObj = emailDataObj;
         this._tplName = emailTemplateName;
