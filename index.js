@@ -13,7 +13,7 @@ const htmlmin       = require('gulp-htmlmin');
 class InkyMailOutput {
     constructor(tplPath) {
         this._tplPath       = tplPath;
-        this._fullTplPath   = path.join(__dirname, this._tplPath);
+        this._fullTplPath   = path.join(process.cwd(), this._tplPath);
         this._mailDataObj   = undefined;
         this._tplName       = undefined;
     }
