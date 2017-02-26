@@ -55,3 +55,4 @@ Note: the **email-template** folder is provided as a sample based on Foundation 
 ### Changelog
 v0.0.2
 - no need to pass data folder property in emailConfig. It is setup automatically.
+- fixed root path calculation when used as dependency package
